@@ -45,11 +45,11 @@ if (!$selectedCar) {
 // Example occupied ranges per car
 $bookedDates = [
     1 => [
-        ['from' => '2026-04-04', 'to' => '2026-04-15'],
-        ['from' => '2026-04-25', 'to' => '2026-04-30']
+        ['from' => '2026-06-04', 'to' => '2026-06-05'],
+        ['from' => '2026-06-06', 'to' => '2026-06-07']
     ],
     2 => [
-        ['from' => '2026-04-02', 'to' => '2026-04-08']
+        ['from' => '2026-05-02', 'to' => '2026-05-08']
     ],
     3 => []
 ];
@@ -103,7 +103,7 @@ $carBookedRanges = $bookedDates[$selectedCar['id']] ?? [];
                     <h5>Select Rental Dates</h5>
 
                     <?php if ($selectedCar['status'] === 'Available'): ?>
-                    <form action="booking_form.php" method="get">
+                    <form action="booking_form.php" method="GET">
                         <div class="mb-3">
                             <label class="form-label">Select Rental Period</label>
                             <input type="text" id="rentalRange" name="rental_range" class="form-control" placeholder="Select date range" required>
