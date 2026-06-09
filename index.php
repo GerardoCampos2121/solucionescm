@@ -1,4 +1,13 @@
 <?php
+
+
+include("conf/Service.php");
+
+//leer los productos de la base de datos
+$response = array();
+$response = leerVehiculos();
+$num_vehiculos = count($response);
+
 $cars = [
     [
         'id' => 1,
@@ -80,21 +89,34 @@ $cars = [
 
         <div class="carousel-inner rounded">
 
-            <?php foreach ($cars as $index => $car): ?>
-            <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+            <?php foreach ($response as $index => $car): ?>
+            <!--<div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">-->
+                <div class="carousel-item <?php echo 'active'; ?>">
 
-                <img src="<?php echo $car['image']; ?>"
-                     class="d-block w-100"
-                     style="height: 400px; object-fit: cover;"
-                     alt="Car Image">
+                <div class="containerImg">
+                    <?php
+                    $images = glob($car['imagepath'] . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
+                        foreach($images as $image) {
+                            echo '<img src="' . $image . '"
+                                  class="img-mod"
+
+                                                       alt="Car Image"
+
+                                  alt="Car Image" /><br />';
+                        }
+                    ?>
+                </div>
 
                 <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
                     <h4 class="fw-bold">
-                        <?php echo $car['make'] . ' ' . $car['model']; ?>
+                        <?php echo $car['marca'] . ' ' . $car['modelo']; ?>
                     </h4>
-                    <span class="badge <?php echo $car['status'] === 'Available' ? 'bg-success' : 'bg-danger'; ?>">
-                        <?php echo $car['status']; ?>
+                    <span class="badge <?php echo 'bg-success'; ?>">
+                        <?php echo 'Available'; ?>
                     </span>
+                <!--<span class="badge <?php echo $car['status'] === 'Available' ? 'bg-success' : 'bg-danger'; ?>">
+                                            <?php echo $car['status']; ?>
+                                        </span>-->
                 </div>
 
             </div>

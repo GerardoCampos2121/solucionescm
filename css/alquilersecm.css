@@ -1,0 +1,14 @@
+.containerImg {
+  width: 100px;
+  height: 300px;
+  border: 1px solid black;
+  display: flex; /* Helps center the image if it's smaller */
+  justify-content: center;
+  align-items: center;
+}
+
+.img-mod {
+  max-width: 90%; /* Forces it to be 10% smaller than the container width */
+  max-height: 90%;
+  object-fit: contain; /* Ensures no distortion */
+}

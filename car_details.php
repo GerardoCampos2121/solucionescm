@@ -24,6 +24,9 @@ $cars = [
     ],
 ];
 
+include("conf/Service.php");
+
+
 // Get car ID
 $id = $_GET['id'] ?? null;
 
