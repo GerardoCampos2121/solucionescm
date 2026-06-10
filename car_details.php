@@ -117,7 +117,7 @@ $carBookedRanges = $bookedDates[$selectedCar['id']] ?? [];
                         <input type="hidden" name="car_id" value="<?php echo $selectedCar['id']; ?>">
 
                         <button type="submit" class="btn btn-success" id="confirmBookingBtn">
-                            Confirmar Reserva
+                            Continuar Reserva
                         </button>
                     </form>
                     <?php else: ?>
