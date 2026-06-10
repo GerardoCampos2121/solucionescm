@@ -11,6 +11,12 @@ function listaVehiculos(){
     return $response;
 }
 
+function clientExist($numeroDocumento){
+    $conn = connectionDB();
+    $response = validarExisteClienteDB($conn,$numeroDocumento);
+    return $response;
+}
+
 
 function registrarCliente($nombre, $numeroDocumento, $edad, $direccion,$contacto, $correo){
 

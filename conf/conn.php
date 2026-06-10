@@ -33,12 +33,20 @@ return $data;
 
 }
 
+function validarExisteClienteDB($conn,$numeroDocumento){
+   $sql = "SELECT 1 FROM cliente WHERE numero_documento = ? LIMIT 1";
+   $stmt = mysqli_prepare($conn, $sql);
+   mysqli_stmt_bind_param($stmt, "s",$numeroDocumento);
+   mysqli_stmt_execute($stmt);
+   $result = mysqli_stmt_get_result($stmt);
+   $rowCount = mysqli_num_rows($result);
+   return $rowCount;
+}
+
 
 function registrarClienteDB($conn, $nombre, $numeroDocumento, $edad, $direccion,$contacto, $correo){
      $sql = "INSERT INTO `cliente`(`nombre`, `numero_documento`, `edad`, `direccion`, `contacto`, `correo`)
      VALUES (?,?,?,?,?,?)";
-
-    echo "Query is ".$sql;
 
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "ssssss",$nombre,$numeroDocumento,$edad,$direccion,$contacto, $correo);

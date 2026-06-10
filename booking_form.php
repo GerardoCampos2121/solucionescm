@@ -65,8 +65,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
 
     //aqui registrar cliente
-    $response = registrarCliente($customerData['name'],$customerData['document_id'],$customerData['age'],$customerData['address'],
-    $customerData['phone'],$customerData['email']);
+    $clientExist = clientExist($customerData['document_id']);
+    if($clientExist <= 0 ){
+        $response = registrarCliente($customerData['name'],$customerData['document_id'],$customerData['age'],$customerData['address'],
+        $customerData['phone'],$customerData['email']);
+    }
     
     // Store booking data in session for transfer to summary page
     $_SESSION['booking_data'] = $customerData;
