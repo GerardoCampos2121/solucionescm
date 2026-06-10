@@ -5,7 +5,7 @@ include("conf/Service.php");
 
 //leer los productos de la base de datos
 $response = array();
-$response = leerVehiculos();
+$response = listaVehiculos();
 $num_vehiculos = count($response);
 
 $cars = [
@@ -14,7 +14,7 @@ $cars = [
         'make' => 'Toyota',
         'model' => 'Corolla',
         'status' => 'Available',
-        'image' => 'images/corolla.png'
+        'image' => 'images/kiaforte2018/corolla.png'
     ],
     [
         'id' => 2,

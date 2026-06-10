@@ -1,4 +1,5 @@
 <?php
+
 // Same car data (later this will come from database)
 $cars = [
     [
@@ -116,7 +117,7 @@ $carBookedRanges = $bookedDates[$selectedCar['id']] ?? [];
                         <input type="hidden" name="car_id" value="<?php echo $selectedCar['id']; ?>">
 
                         <button type="submit" class="btn btn-success" id="confirmBookingBtn">
-                            Confirm Booking
+                            Confirmar Reserva
                         </button>
                     </form>
                     <?php else: ?>

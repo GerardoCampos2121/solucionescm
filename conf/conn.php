@@ -34,5 +34,24 @@ return $data;
 }
 
 
+function registrarClienteDB($conn, $nombre, $numeroDocumento, $edad, $direccion,$contacto, $correo){
+     $sql = "INSERT INTO `cliente`(`nombre`, `numero_documento`, `edad`, `direccion`, `contacto`, `correo`)
+     VALUES (?,?,?,?,?,?)";
+
+    echo "Query is ".$sql;
+
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ssssss",$nombre,$numeroDocumento,$edad,$direccion,$contacto, $correo);
+    mysqli_stmt_execute($stmt);
+    $last_id = mysqli_stmt_insert_id($stmt);
+    echo "Inserted ID: " . $last_id;
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+
+     return $last_id;
+
+}
+
+
 
 ?>

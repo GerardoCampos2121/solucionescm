@@ -22,6 +22,7 @@ $address = $bookingData['address'] ?? 'N/A';
 $email = $bookingData['email'] ?? 'N/A';
 $phone = $bookingData['phone'] ?? 'N/A';
 
+
 // Car data (same as in other files - later this will come from database)
 $cars = [
     [

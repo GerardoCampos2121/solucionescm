@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+include("conf/Service.php");
+
 // Get car ID and dates from URL parameters
 $carId = $_GET['car_id'] ?? null;
 $startDate = $_GET['start_date'] ?? null;
@@ -61,6 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'email' => $_POST['email'] ?? '',
         'phone' => $_POST['phone'] ?? ''
     ];
+
+    //aqui registrar cliente
+    $response = registrarCliente($customerData['name'],$customerData['document_id'],$customerData['age'],$customerData['address'],
+    $customerData['phone'],$customerData['email']);
     
     // Store booking data in session for transfer to summary page
     $_SESSION['booking_data'] = $customerData;
