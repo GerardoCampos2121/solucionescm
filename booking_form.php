@@ -279,8 +279,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="checkout-grid d-flex justify-content-center align-items-center vh-400">
             <div class="form-container">
+                <!-- Customer Registration Check Div -->
+                <div id="customer-check-section" class="customer-check-card mb-4">
+                    <div class="card-header-custom">
+                        <h4><i class="fas fa-user-check me-2"></i>Customer Verification</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <p class="text-muted mb-3">Already have an account? Enter your Document ID to verify and auto-fill your information.</p>
+                        <div class="row g-3 align-items-end">
+                            <div class="col-md-8">
+                                <label for="check_document_id" class="form-label">
+                                    <i class="fas fa-id-card me-1"></i>Document ID
+                                </label>
+                                <input type="text" class="form-control" id="check_document_id" 
+                                       placeholder="Enter your DUI, Passport, or ID number">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn-check-customer w-100" id="btnCheckCustomer">
+                                    <i class="fas fa-search me-1"></i>Check
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Validation message -->
+                        <div id="customer-check-message" class="mt-3" style="display: none;">
+                            <div class="alert" role="alert">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <span id="customer-check-text"></span>
+                            </div>
+                        </div>
+                        <!-- Action buttons for registered customer (dynamically shown/hidden by JS) -->
+                        <div id="customer-found-actions" class="mt-3" style="display: none;"></div>
+                    </div>
+                </div>
+
                 <!-- Booking Form - Three Column Layout -->
-                <form method="POST" action="booking_form.php?car_id=<?php echo $carId; ?>&start_date=<?php echo urlencode($startDate); ?>&end_date=<?php echo urlencode($endDate); ?>">
+                <form method="POST" action="booking_form.php?car_id=<?php echo $carId; ?>&start_date=<?php echo urlencode($startDate); ?>&end_date=<?php echo urlencode($endDate); ?>" id="bookingForm">
                     <!-- Hidden fields for car and dates -->
                     <input type="hidden" name="car_id" value="<?php echo $carId; ?>">
                     <input type="hidden" name="start_date" value="<?php echo $startDate; ?>">

@@ -12,3 +12,315 @@
   max-height: 90%;
   object-fit: contain; /* Ensures no distortion */
 }
+
+/* Customer Check Card Styles */
+.customer-check-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.customer-check-card .card-header-custom {
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px 12px 0 0;
+}
+
+.customer-check-card .card-header-custom h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.customer-check-card .card-body {
+  padding: 20px;
+}
+
+/* Check Customer Button */
+.btn-check-customer {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-check-customer:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.btn-check-customer:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Alert styles for customer check */
+#customer-check-message .alert {
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+#customer-check-message .alert-success {
+  background-color: #d1fae5;
+  border-color: #6ee7b7;
+  color: #065f46;
+}
+
+#customer-check-message .alert-danger {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+#customer-check-message .alert-info {
+  background-color: #dbeafe;
+  border-color: #93c5fd;
+  color: #1e40af;
+}
+
+/* Form disabled state */
+#bookingForm.form-disabled .booking-card {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+#bookingForm.form-disabled input,
+#bookingForm.form-disabled textarea {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+}
+
+/* Loading spinner */
+.btn-check-customer.loading {
+  position: relative;
+  color: transparent;
+}
+
+.btn-check-customer.loading::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  border: 2px solid #ffffff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Customer found actions */
+#customer-found-actions {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Existing styles */
+.vh-400 {
+  min-height: 400px;
+}
+
+.checkout-grid {
+  padding: 20px;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.booking-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  height: 100%;
+}
+
+.booking-card .card-header-custom {
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px 12px 0 0;
+}
+
+.booking-card .card-header-custom h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.booking-card .card-body {
+  padding: 20px;
+}
+
+.checkout-form {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.form-label i {
+  color: #3b82f6;
+}
+
+.required {
+  color: #ef4444;
+}
+
+.form-control {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  outline: none;
+}
+
+.form-text {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.input-group-text {
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  color: #6b7280;
+}
+
+.info-box {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #0369a1;
+  font-size: 0.875rem;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.info-label {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.info-value {
+  color: #1f2937;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.btn-confirm {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-confirm:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.btn-cancel {
+  background: #fff;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+  background: #f9fafb;
+  color: #374151;
+}
+
+.back-btn {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.back-btn:hover {
+  color: #2563eb;
+}
+
+.page-header {
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: white;
+  padding: 30px 0;
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  font-size: 1.75rem;
+  margin: 0;
+}
+
+footer {
+  background: #111827;
+  color: #9ca3af;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+/* Navbar */
+.navbar {
+  background: #1f2937;
+  padding: 10px 0;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #d1d5db;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: white;
+}
