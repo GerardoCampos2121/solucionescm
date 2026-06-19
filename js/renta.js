@@ -234,6 +234,9 @@ $(document).ready(function() {
         const form = $('#bookingForm');
         form.addClass('form-disabled');
         form.find('input, textarea').prop('disabled', true);
+        $("#guardar_frm").prop('disabled', false);
+        $("#guardar_frm").removeClass("form-disabled");
+        
     }
     
     /**

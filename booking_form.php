@@ -3,12 +3,21 @@ session_start();
 
 include("conf/Service.php");
 
-// Get car ID and dates from URL parameters
-$carId = $_GET['car_id'] ?? null;
-$startDate = $_GET['start_date'] ?? null;
-$endDate = $_GET['end_date'] ?? null;
-$bookingConfirmed = false;
-
+if (!isset($_POST['guardar_frm'])) //si no viene el boton en el post entonces vienen de la pagina anterior
+{    
+    // Get car ID and dates from URL parameters
+    $carId = $_GET['car_id'] ?? null;
+    $startDate = $_GET['start_date'] ?? null;
+    $endDate = $_GET['end_date'] ?? null;
+    $bookingConfirmed = false;
+    echo "entra 1";
+}else{
+     // post car ID and dates from URL parameters, si ya existe el boton entonces viene del formulario y se usa post
+    $carId = $_POST['car_id'] ?? null;
+    $startDate = $_POST['start_date'] ?? null;
+    $endDate = $_POST['end_date'] ?? null;
+    $bookingConfirmed = false;
+}
 // Car data (same as in car_details.php - later this will come from database)
 $cars = [
     [
@@ -313,7 +322,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <!-- Booking Form - Three Column Layout -->
-                <form method="POST" action="booking_form.php?car_id=<?php echo $carId; ?>&start_date=<?php echo urlencode($startDate); ?>&end_date=<?php echo urlencode($endDate); ?>" id="bookingForm">
+                <form method="POST" action="" id="bookingForm">
                     <!-- Hidden fields for car and dates -->
                     <input type="hidden" name="car_id" value="<?php echo $carId; ?>">
                     <input type="hidden" name="start_date" value="<?php echo $startDate; ?>">
@@ -456,9 +465,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <div class="d-grid gap-3 mt-4">
-                <button type="submit" class="btn-confirm">
-                    <i class="fas fa-check-circle me-2"></i>Confirm Booking
-                </button>
+                    <input type="submit" class="btn-confirm" name="guardar_frm" value="Confirm Booking" id="guardar_frm"> 
+                
                         <a href="car_details.php?id=<?php echo $carId; ?>" class="btn btn-cancel">
                             <i class="fas fa-times me-2"></i>Cancel
                         </a>

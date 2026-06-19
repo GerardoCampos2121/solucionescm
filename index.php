@@ -143,7 +143,9 @@ $cars = [
                 <div class="card-body">
                     <h5 class="card-title">Disponibles</h5>
                     <p class="card-text fs-4">
-                        <?php echo count(array_filter($cars, fn($c) => $c['status'] === 'Available')); ?>
+                        <?php //echo count(array_filter($cars, fn($c) => $c['status'] === 'Available'));
+                        echo count(array_filter($cars, function($c) { return $c['status'] === 'Available'; }));
+                        ?>
                     </p>
                 </div>
             </div>
@@ -154,7 +156,10 @@ $cars = [
                 <div class="card-body">
                     <h5 class="card-title">Ocupados</h5>
                     <p class="card-text fs-4">
-                        <?php echo count(array_filter($cars, fn($c) => $c['status'] === 'Rented')); ?>
+                        <?php 
+                        //echo count(array_filter($cars, fn($c) => $c['status'] === 'Rented'));
+                         echo count(array_filter($cars, function($c) { return $c['status'] === 'Rented'; }));
+                          ?>
                     </p>
                 </div>
             </div>
