@@ -232,9 +232,9 @@ $(document).ready(function() {
      */
     function disableForm() {
         const form = $('#bookingForm');
-        form.addClass('form-disabled');               
+        //form.addClass('form-disabled');               
         form.find('input, textarea').prop('readonly', true);
-        
+
         
     }
     
