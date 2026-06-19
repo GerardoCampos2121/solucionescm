@@ -10,13 +10,14 @@ if (!isset($_POST['guardar_frm'])) //si no viene el boton en el post entonces vi
     $startDate = $_GET['start_date'] ?? null;
     $endDate = $_GET['end_date'] ?? null;
     $bookingConfirmed = false;
-    echo "entra 1";
+
 }else{
      // post car ID and dates from URL parameters, si ya existe el boton entonces viene del formulario y se usa post
-    $carId = $_POST['car_id'] ?? null;
-    $startDate = $_POST['start_date'] ?? null;
-    $endDate = $_POST['end_date'] ?? null;
+    $carId = $_POST['car_id'];
+    $startDate = $_POST['start_date'];
+    $endDate = $_POST['end_date'];
     $bookingConfirmed = false;
+
 }
 // Car data (same as in car_details.php - later this will come from database)
 $cars = [

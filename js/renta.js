@@ -233,8 +233,8 @@ $(document).ready(function() {
     function disableForm() {
         const form = $('#bookingForm');
         form.addClass('form-disabled');
-        form.find('input, textarea').prop('disabled', true);
-        $("#guardar_frm").prop('disabled', false);
+        form.find('input, textarea').prop('readonly', true);
+        $("#guardar_frm").prop('readonly', false);
         $("#guardar_frm").removeClass("form-disabled");
         
     }
