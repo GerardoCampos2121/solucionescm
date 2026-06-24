@@ -57,7 +57,11 @@ $carBookedRanges = $bookedDates[$id] ?? [];
 <html>
 <head>
     <title>Car Details</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 CDN -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+     <!-- Bootstrap JS -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <style>
@@ -73,10 +77,46 @@ $carBookedRanges = $bookedDates[$id] ?? [];
             .btn:hover { background: rgba(0,0,0,0.8); }
             .prev { left: 10px; }
             .next { right: 10px; }
+
+            .btn-propio {
+                    display: inline-block;
+                    padding: 0.375rem 0.75rem;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    text-align: center;
+                    text-decoration: none;
+                    color: #fff;
+                    background-color: #0d6efd;
+                    border: 1px solid #0d6efd;
+                    border-radius: 0.375rem;
+                    cursor: pointer;
+                    transition: all 0.15s ease-in-out;
+            }
         </style>
-    <?php include("pages/header.php");?>
+  <?php include("pages/header.php");?>
 </head>
-<body class="bg-light">
+<body class="bg-light">  
+
+<!-- 🔷 HEADER / NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark shadow"
+     style="background: linear-gradient(90deg, #111827, #1f2937);">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">🚗 SECM Rent a Car</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.php">Inicio</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <div class="container mt-5">
 
@@ -143,11 +183,16 @@ $carBookedRanges = $bookedDates[$id] ?? [];
                         </div>
 
                         <!-- Hidden field for car ID -->
-                        <input type="hidden" name="car_id" value="<?php echo $selectedCar['id']; ?>">
-</br></br></br>
-                        <button type="submit" class="btn btn-success" id="confirmBookingBtn">
-                            Continuar Reserva
+                        <input type="hidden" name="car_id" value="<?php echo $id; ?>">
+                        <div>
+                            <button type="submit" class="btn-propio" id="confirmBookingBtn">
+                                Continuar Reserva
                         </button>
+                             
+                        </div>
+                       
+                        
+                      
                     </form>
 
                 </div>
