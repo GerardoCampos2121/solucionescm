@@ -32,6 +32,8 @@ include("conf/Service.php");
 $id = $_GET['id'] ?? null;
 
 $vehiculoSeleccionado = dataVehiculo($id);
+$caracteristicas = explode(";",$vehiculoSeleccionado['descripcion']);
+$c = count($caracteristicas);
 
 // Find selected car
 $selectedCar = null;
@@ -71,21 +73,56 @@ $carBookedRanges = $bookedDates[$selectedCar['id']] ?? [];
     <title>Car Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <style>
+
+            /* Slider Container */
+            .slider-container { position: relative; width: 600px; height: 400px; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+            .slides { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
+            .slide { min-width: 100%; height: 100%; }
+            .slide img { width: 100%; height: 100%; object-fit: cover; }
+
+            /* Navigation Buttons */
+            .btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 15px; cursor: pointer; font-size: 18px; border-radius: 50%; user-select: none; }
+            .btn:hover { background: rgba(0,0,0,0.8); }
+            .prev { left: 10px; }
+            .next { right: 10px; }
+        </style>
+    <?php include("pages/header.php");?>
 </head>
 <body class="bg-light">
 
 <div class="container mt-5">
 
-    <a href="index.php" class="btn btn-secondary mb-4">← Back to Dashboard</a>
+    <a href="index.php" class="btn btn-secondary mb-4">← Regresar a Inicio</a>
 
     <div class="card shadow">
         <div class="row g-0">
 
             <!-- Image -->
             <div class="col-md-6">
-                <img src="<?php echo $selectedCar['image']; ?>"
-                     class="img-fluid rounded-start"
-                     style="height:100%; object-fit:cover;">
+                <div class="slider-container">
+                    <div class="slides">
+
+                        <?php
+                        // 1. Define the directory path containing your images
+                        $dir = $vehiculoSeleccionado['imagepath'];
+
+                        // 2. Fetch all image files matching common extensions
+                        $images = glob($dir . "*.{jpg,jpeg,png,gif,webp}", GLOB_BRACE);
+
+                        // 3. Loop through the array and render each image inside a slide div
+                        if (!empty($images)) {
+                            foreach ($images as $image) {
+                                echo '<div class="slide"><img src="' . htmlspecialchars($image) . '" alt="Slider Image"></div>';
+                            }
+                        } else {
+                            echo '<div class="slide" style="display:flex; justify-content:center; align-items:center; background:#ccc;">No images found.</div>';
+                        }
+                        ?>
+
+                    </div>
+                </div>
             </div>
 
             <!-- Details -->
@@ -105,29 +142,31 @@ $carBookedRanges = $bookedDates[$selectedCar['id']] ?? [];
                         <?php endif; ?>
                     </p>
 
+                    <p>Descripción:</p>
+                    <ul>
+                        <?php for($i=0;$i<$c;$i++){
+                            echo "<li>$caracteristicas[$i]</li>";
+                        } ?>
+                    </ul>
+
                     <hr>
 
-                    <h5>Select Rental Dates</h5>
+                    <h5>Seleccione el periodo de fechas</h5>
 
-                    <?php if ($selectedCar['status'] === 'Available'): ?>
+
                     <form action="booking_form.php" method="GET">
                         <div class="mb-3">
-                            <label class="form-label">Select Rental Period</label>
+                            <label class="form-label">Periodo de alquiler</label>
                             <input type="text" id="rentalRange" name="rental_range" class="form-control" placeholder="Select date range" required>
                         </div>
 
                         <!-- Hidden field for car ID -->
                         <input type="hidden" name="car_id" value="<?php echo $selectedCar['id']; ?>">
-
+</br></br></br>
                         <button type="submit" class="btn btn-success" id="confirmBookingBtn">
                             Continuar Reserva
                         </button>
                     </form>
-                    <?php else: ?>
-                        <div class="alert alert-danger">
-                            This vehicle is currently rented.
-                        </div>
-                    <?php endif; ?>
 
                 </div>
             </div>
@@ -180,6 +219,29 @@ $carBookedRanges = $bookedDates[$selectedCar['id']] ?? [];
         endDateInput.value = dates[1];
         this.appendChild(endDateInput);
     });
+
+    let currentIndex = 0;
+    const slidesContainer = document.querySelector('.slides');
+    const totalSlides = document.querySelectorAll('.slide').length;
+
+    function updateSlider() {
+        // Shift the slide viewport container left/right based on current index
+        slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function moveSlide(direction) {
+        currentIndex += direction;
+        // Loop back to first or last slide if bounds are exceeded
+        if (currentIndex >= totalSlides) currentIndex = 0;
+        if (currentIndex < 0) currentIndex = totalSlides - 1;
+        updateSlider();
+    }
+
+    // Optional: Auto-play the slider every 4 seconds
+    setInterval(() => {
+        moveSlide(1);
+    }, 3000);
 </script>
+
 </body>
 </html>
