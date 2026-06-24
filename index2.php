@@ -77,13 +77,22 @@ $num_vehiculos = count($response);
     ?>   
         <div class="col-md-4">
             <div class="card" style="width: 18rem;">
-                 <img src="<?= $response[$i]['imagepath'] ?>" class="img-fluid card-img-top">
+
+                <?php
+                                    $images = glob($response[$i]['imagepath'] . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
+                                    if (!empty($images)) {
+                                        echo '<img src="' . $images[0] . '" alt="' . $response[$i]['marca'] . ' ' . $response[$i]['modelo'] . '" width="100%">';
+                                    } else {
+                                        echo '<img src="https://via.placeholder.com/200x150?text=No+Image" alt="No Image">';
+                                    }
+                                    ?>
+
                 <div class="card-body">
                     <h5 class="card-title"><center><?= $response[$i]["marca"]." ".$response[$i]["modelo"] ?></center></h5>
                     <p class="card-text">
                                        <center>$ <?= number_format($response[$i]['preciodiario'], 2); ?> / Día</center></p>
                                        <!-- aqui en el href poner el link a donde va a reserevar y ponerle el id -->
-                                       <center><a href="link?<?= $response[$i]["id_vehiculo"]?>" class="btn btn-primary">Reservar</a><center>
+                                       <center><a href="car_details.php?id=<?= $response[$i]["id_vehiculo"]?>" class="btn btn-primary">Reservar</a><center>
                  </div>
             </div>
             <center><br>

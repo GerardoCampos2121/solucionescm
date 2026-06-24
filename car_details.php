@@ -35,20 +35,6 @@ $vehiculoSeleccionado = dataVehiculo($id);
 $caracteristicas = explode(";",$vehiculoSeleccionado['descripcion']);
 $c = count($caracteristicas);
 
-// Find selected car
-$selectedCar = null;
-foreach ($cars as $car) {
-    if ($car['id'] == $id) {
-        $selectedCar = $car;
-        break;
-    }
-}
-
-// If car not found
-if (!$selectedCar) {
-    die("Car not found.");
-}
-
 
 // Example occupied ranges per car
 $bookedDates = [
@@ -63,7 +49,7 @@ $bookedDates = [
 ];
 
 // Get this car's booked dates
-$carBookedRanges = $bookedDates[$selectedCar['id']] ?? [];
+$carBookedRanges = $bookedDates[$id] ?? [];
 
 ?>
 
@@ -135,11 +121,7 @@ $carBookedRanges = $bookedDates[$selectedCar['id']] ?? [];
 
                     <p>
                         Status:
-                        <?php if ($selectedCar['status'] === 'Available'): ?>
                             <span class="badge bg-success">Available</span>
-                        <?php else: ?>
-                            <span class="badge bg-danger">Rented</span>
-                        <?php endif; ?>
                     </p>
 
                     <p>Descripción:</p>
