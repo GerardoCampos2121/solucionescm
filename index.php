@@ -14,9 +14,16 @@ $num_vehiculos = count($response);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SECM Rent a Car - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
 
     <!-- Bootstrap 5 CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap/5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+     <!-- Bootstrap JS -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+   
     <!-- Custom CSS -->
     <link href="css/alquilersecm.css" rel="stylesheet">
 
@@ -26,10 +33,12 @@ $num_vehiculos = count($response);
             background: white;
             background-attachment: fixed;
             min-height: 100vh;
+            font-family: "Roboto", sans-serif;
         }
 
        .gallery-img { height: 200px; object-fit: cover; width: 100%; border-radius: 8px; }
     </style>
+    
 </head>
 <body>
 
@@ -55,6 +64,7 @@ $num_vehiculos = count($response);
 
 <!-- 🔷 MAIN CONTENT -->
 <div class="container mt-5">
+    
 
     <!-- Welcome Section -->
     <div class="text-center mb-5">
@@ -65,18 +75,18 @@ $num_vehiculos = count($response);
     <!-- Available Cars Grid -->
     <div class="mb-5">
         <h2>Available Vehicles</h2>
-
+        
         <?php if ($num_vehiculos > 0): ?>
-
+        <div class="row">
         <?php foreach ($response as $car): ?>
-
+        
         <div class="col-lg-3 p-3">
 
 
                     <?php
                     $images = glob($car['imagepath'] . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
                     if (!empty($images)) {
-                        echo '<img src="' . $images[0] . '" alt="' . $car['marca'] . ' ' . $car['modelo'] . '">';
+                        echo '<img src="' . $images[0] . '" alt="' . $car['marca'] . ' ' . $car['modelo'] . '" width="20%">';
                     } else {
                         echo '<img src="https://via.placeholder.com/200x150?text=No+Image" alt="No Image">';
                     }
@@ -113,8 +123,9 @@ $num_vehiculos = count($response);
                 </div>
             </div>
         </div>
-
+  
     <?php endforeach; ?>
+          </div>
     <?php else: ?>
         <div class="empty-state">
             <i>🚗</i>
@@ -122,7 +133,7 @@ $num_vehiculos = count($response);
             <p class="text-muted">Please check back later for new additions to our fleet.</p>
         </div>
     <?php endif; ?>
-
+    </div>
 
 </div>
 
@@ -133,7 +144,6 @@ $num_vehiculos = count($response);
     </div>
 </footer>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap/5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
