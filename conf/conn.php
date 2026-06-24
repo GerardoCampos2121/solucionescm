@@ -84,5 +84,24 @@ function recuperarDataVehiculo($conn,$carId){
 }
 
 
+function registrarReserva($conn, $idCliente,$idVehiculo,$fechaInicio,$fechaFin,$estadoPago,$numeroReserva,
+                                $montoTotal,$fechaReserva){
+     $sql = "INSERT INTO `cliente`(`id_cliente`, `id_vehiculo`, `fecha_inicio`, `fecha_fin`, `estado_pago`,
+                                    `numero_reserva`, `monto_total`,`fecha_reserva`)
+     VALUES (?,?,?,?,?,?,?,?)";
+
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ss",$idCliente,$idVehiculo,$fechaInicio,$fechaFin,$estadoPago, $numeroReserva,$montoTotal,$fechaReserva);
+    mysqli_stmt_execute($stmt);
+    $last_id = mysqli_stmt_insert_id($stmt);
+    //echo "Inserted ID: " . $last_id;
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+
+     return $last_id;
+
+}
+
+
 
 ?>

@@ -7,7 +7,6 @@ $response = listaVehiculos();
 $num_vehiculos = count($response);
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +40,7 @@ $num_vehiculos = count($response);
     
 </head>
 <body>
-
+    
 <!-- 🔷 HEADER / NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark shadow"
      style="background: linear-gradient(90deg, #111827, #1f2937);">
@@ -61,81 +60,52 @@ $num_vehiculos = count($response);
         </div>
     </div>
 </nav>
-
-<!-- 🔷 MAIN CONTENT -->
 <div class="container mt-5">
     
-
     <!-- Welcome Section -->
-    <div class="text-center mb-5">
-        <h1 class="display-5 fw-bold" style="color: #111827;">Welcome to SECM Rent a Car</h1>
-        <p class="text-muted lead">Choose from our selection of quality vehicles</p>
+    <div class="row">
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold" style="color: #111827;">Welcome to SECM Rent a Car</h1>
+            <p class="text-muted lead">Choose from our selection of quality vehicles</p>
+        </div>
     </div>
+    <div class="row">
+    <?php
+    $i=0;
+    for($i=0;$i<$num_vehiculos;$i++){
+        $c=1;
+    ?>   
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
 
-    <!-- Available Cars Grid -->
-    <div class="mb-5">
-        <h2>Available Vehicles</h2>
-        
-        <?php if ($num_vehiculos > 0): ?>
-        <div class="row">
-        <?php foreach ($response as $car): ?>
-        
-        <div class="col-lg-3 p-3">
+                <?php
+                                    $images = glob($response[$i]['imagepath'] . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
+                                    if (!empty($images)) {
+                                        echo '<img src="' . $images[0] . '" alt="' . $response[$i]['marca'] . ' ' . $response[$i]['modelo'] . '" width="100%">';
+                                    } else {
+                                        echo '<img src="https://via.placeholder.com/200x150?text=No+Image" alt="No Image">';
+                                    }
+                                    ?>
 
-
-                    <?php
-                    $images = glob($car['imagepath'] . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
-                    if (!empty($images)) {
-                        echo '<img src="' . $images[0] . '" alt="' . $car['marca'] . ' ' . $car['modelo'] . '" width="20%">';
-                    } else {
-                        echo '<img src="https://via.placeholder.com/200x150?text=No+Image" alt="No Image">';
-                    }
-                    ?>
-
-
-                <!-- Car Details (Name, Price, Button) -->
-                <div class="car-details">
-                    <div>
-                        <!-- Year Badge -->
-                        <div class="car-year-badge">
-                            📅 <?php echo htmlspecialchars($car['anio']); ?>
-                        </div>
-
-                        <!-- Car Name -->
-                        <h5 class="car-name">
-                            <?php echo htmlspecialchars($car['marca'] . ' ' . $car['modelo']); ?>
-                        </h5>
-                    </div>
-
-                    <!-- Price Container -->
-                    <div class="car-price-container">
-                        <div class="car-price">
-                            $<?php echo number_format($car['preciodiario'], 2); ?>
-                            <small>/ day</small>
-                        </div>
-                    </div>
-
-                    <!-- Rent Button -->
-                    <a href="car_details.php?id=<?php echo $car['id_vehiculo']; ?>"
-                       class="btn btn-primary btn-rent">
-                        View Details
-                    </a>
-                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><center><?= $response[$i]["marca"]." ".$response[$i]["modelo"] ?></center></h5>
+                    <p class="card-text">
+                                       <center>$ <?= number_format($response[$i]['preciodiario'], 2); ?> / Día</center></p>
+                                       <!-- aqui en el href poner el link a donde va a reserevar y ponerle el id -->
+                                       <center><a href="car_details.php?id=<?= $response[$i]["id_vehiculo"]?>" class="btn btn-primary">Reservar</a><center>
+                 </div>
             </div>
+            <center><br>
+                    
+            </center>
         </div>
-  
-    <?php endforeach; ?>
-          </div>
-    <?php else: ?>
-        <div class="empty-state">
-            <i>🚗</i>
-            <h4>No vehicles available at the moment</h4>
-            <p class="text-muted">Please check back later for new additions to our fleet.</p>
-        </div>
-    <?php endif; ?>
+    <?php
+    $c++;
+     } 
+    ?>
     </div>
-
-</div>
+  
+</div><!-- fin del container -->
 
 <!-- Footer -->
 <footer class="text-center py-4" style="background: #111827; color: #9ca3af;">
@@ -143,7 +113,4 @@ $num_vehiculos = count($response);
         <p class="mb-0">&copy; 2024 SECM Rent a Car. All rights reserved.</p>
     </div>
 </footer>
-
-
 </body>
-</html>

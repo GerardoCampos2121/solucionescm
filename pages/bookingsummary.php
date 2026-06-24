@@ -1,5 +1,7 @@
 <?php
 session_start();
+include("conf/Service.php");
+
 
 // Get booking data from session (transferred via POST from booking_form.php)
 $bookingData = $_SESSION['booking_data'] ?? null;
