@@ -1,48 +1,37 @@
 <?php
 
-
 include("conf/Service.php");
 
-//leer los productos de la base de datos
-$response = array();
+// Read vehicles from database using listaVehiculos function
 $response = listaVehiculos();
 $num_vehiculos = count($response);
 
-$cars = [
-    [
-        'id' => 1,
-        'make' => 'Toyota',
-        'model' => 'Corolla',
-        'status' => 'Available',
-        'image' => 'images/kiaforte2018/corolla.png'
-    ],
-    [
-        'id' => 2,
-        'make' => 'Honda',
-        'model' => 'Civic',
-        'status' => 'Rented',
-        'image' => 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=200&q=60'
-    ],
-    [
-        'id' => 3,
-        'make' => 'Kia',
-        'model' => 'Forte',
-        'status' => 'Available',
-        'image' => 'images/forte2014.jpeg'
-    ],
-];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Car Rental Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECM Rent a Car - Dashboard</title>
 
     <!-- Bootstrap 5 CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/alquilersecm.css" rel="stylesheet">
+
+    <style>
+        /* Page Background */
+        body {
+            background: white;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+       .gallery-img { height: 200px; object-fit: cover; width: 100%; border-radius: 8px; }
+    </style>
 </head>
-<body class="bg-light">
+<body>
 
 <!-- 🔷 HEADER / NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark shadow"
@@ -57,14 +46,8 @@ $cars = [
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="index.php">Dashboard</a>
+                    <a class="nav-link active" href="index.php">Inicio</a>
                 </li>
-                <!--<li class="nav-item">
-                    <a class="nav-link" href="cars.php">Manage Cars</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Bookings</a>
-                </li>-->
             </ul>
         </div>
     </div>
@@ -73,175 +56,84 @@ $cars = [
 <!-- 🔷 MAIN CONTENT -->
 <div class="container mt-5">
 
-    <!-- slide -->
-    <!-- 🚗 Car Preview Slider -->
-    <div id="carCarousel" class="carousel slide mb-4 shadow" data-bs-ride="carousel">
+    <!-- Welcome Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold" style="color: #111827;">Welcome to SECM Rent a Car</h1>
+        <p class="text-muted lead">Choose from our selection of quality vehicles</p>
+    </div>
 
-        <div class="carousel-indicators">
-            <?php foreach ($cars as $index => $car): ?>
-                <button type="button"
-                        data-bs-target="#carCarousel"
-                        data-bs-slide-to="<?php echo $index; ?>"
-                        class="<?php echo $index === 0 ? 'active' : ''; ?>">
-                </button>
-            <?php endforeach; ?>
-        </div>
+    <!-- Available Cars Grid -->
+    <div class="mb-5">
+        <h2>Available Vehicles</h2>
 
-        <div class="carousel-inner rounded">
+        <?php if ($num_vehiculos > 0): ?>
 
-            <?php foreach ($response as $index => $car): ?>
-            <!--<div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">-->
-                <div class="carousel-item <?php echo 'active'; ?>">
+        <?php foreach ($response as $car): ?>
 
-                <div class="containerImg">
+        <div class="col-lg-3 p-3">
+
+
                     <?php
                     $images = glob($car['imagepath'] . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
-                        foreach($images as $image) {
-                            echo '<img src="' . $image . '"
-                                  class="img-mod"
-
-                                                       alt="Car Image"
-
-                                  alt="Car Image" /><br />';
-                        }
+                    if (!empty($images)) {
+                        echo '<img src="' . $images[0] . '" alt="' . $car['marca'] . ' ' . $car['modelo'] . '">';
+                    } else {
+                        echo '<img src="https://via.placeholder.com/200x150?text=No+Image" alt="No Image">';
+                    }
                     ?>
-                </div>
-
-                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
-                    <h4 class="fw-bold">
-                        <?php echo $car['marca'] . ' ' . $car['modelo']; ?>
-                    </h4>
-                    <span class="badge <?php echo 'bg-success'; ?>">
-                        <?php echo 'Available'; ?>
-                    </span>
-                <!--<span class="badge <?php echo $car['status'] === 'Available' ? 'bg-success' : 'bg-danger'; ?>">
-                                            <?php echo $car['status']; ?>
-                                        </span>-->
-                </div>
-
-            </div>
-            <?php endforeach; ?>
-
-        </div>
-
-        <!-- Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-
-        <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
-
-    </div>
 
 
-    <!-- Summary Cards -->
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card text-white bg-success shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Disponibles</h5>
-                    <p class="card-text fs-4">
-                        <?php //echo count(array_filter($cars, fn($c) => $c['status'] === 'Available'));
-                        echo count(array_filter($cars, function($c) { return $c['status'] === 'Available'; }));
-                        ?>
-                    </p>
+                <!-- Car Details (Name, Price, Button) -->
+                <div class="car-details">
+                    <div>
+                        <!-- Year Badge -->
+                        <div class="car-year-badge">
+                            📅 <?php echo htmlspecialchars($car['anio']); ?>
+                        </div>
+
+                        <!-- Car Name -->
+                        <h5 class="car-name">
+                            <?php echo htmlspecialchars($car['marca'] . ' ' . $car['modelo']); ?>
+                        </h5>
+                    </div>
+
+                    <!-- Price Container -->
+                    <div class="car-price-container">
+                        <div class="car-price">
+                            $<?php echo number_format($car['preciodiario'], 2); ?>
+                            <small>/ day</small>
+                        </div>
+                    </div>
+
+                    <!-- Rent Button -->
+                    <a href="car_details.php?id=<?php echo $car['id_vehiculo']; ?>"
+                       class="btn btn-primary btn-rent">
+                        View Details
+                    </a>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card text-white bg-danger shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Ocupados</h5>
-                    <p class="card-text fs-4">
-                        <?php 
-                        //echo count(array_filter($cars, fn($c) => $c['status'] === 'Rented'));
-                         echo count(array_filter($cars, function($c) { return $c['status'] === 'Rented'; }));
-                          ?>
-                    </p>
-                </div>
-            </div>
+    <?php endforeach; ?>
+    <?php else: ?>
+        <div class="empty-state">
+            <i>🚗</i>
+            <h4>No vehicles available at the moment</h4>
+            <p class="text-muted">Please check back later for new additions to our fleet.</p>
         </div>
+    <?php endif; ?>
 
-        <div class="col-md-4">
-            <div class="card text-white bg-dark shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Total Cars</h5>
-                    <p class="card-text fs-4">
-                        <?php echo count($cars); ?>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Cars Table -->
-    <div class="card shadow-sm">
-        <div class="card-header bg-white">
-            <h5 class="mb-0">Car List</h5>
-        </div>
-
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle">
-                    <thead class="table-primary">
-                        <tr>
-                            <th>ID</th>
-                            <th>Vehicle</th>
-                            <th>Status</th>
-                            <th>Accion</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($cars as $car): ?>
-                        <tr>
-                            <td><?php echo $car['id']; ?></td>
-
-                            <!-- Vehicle Column with Image -->
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <img src="<?php echo $car['image']; ?>"
-                                         alt="Car Image"
-                                         class="rounded me-3 shadow-sm"
-                                         width="80" height="60"
-                                         style="object-fit: cover;">
-
-                                    <div>
-                                        <strong><?php echo $car['make']; ?></strong><br>
-                                        <small class="text-muted"><?php echo $car['model']; ?></small>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td>
-                                <?php if ($car['status'] === 'Available'): ?>
-                                    <span class="badge bg-success">Available</span>
-                                <?php else: ?>
-                                    <span class="badge bg-danger">Rented</span>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if ($car['status'] === 'Available'): ?>
-                                <a href="car_details.php?id=<?php echo $car['id']; ?>"
-                                   class="btn btn-sm btn-dark">
-                                    Ver
-                                </a>
-                             <?php else: ?>
-                             <?php endif; ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 
 </div>
 
+<!-- Footer -->
+<footer class="text-center py-4" style="background: #111827; color: #9ca3af;">
+    <div class="container">
+        <p class="mb-0">&copy; 2024 SECM Rent a Car. All rights reserved.</p>
+    </div>
+</footer>
+
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap/5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

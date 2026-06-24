@@ -31,6 +31,8 @@ include("conf/Service.php");
 // Get car ID
 $id = $_GET['id'] ?? null;
 
+$vehiculoSeleccionado = dataVehiculo($id);
+
 // Find selected car
 $selectedCar = null;
 foreach ($cars as $car) {
@@ -90,7 +92,8 @@ $carBookedRanges = $bookedDates[$selectedCar['id']] ?? [];
             <div class="col-md-6">
                 <div class="card-body">
                     <h2 class="card-title fw-bold">
-                        <?php echo $selectedCar['make'] . ' ' . $selectedCar['model']; ?>
+                        <?php echo $vehiculoSeleccionado['marca'] . ' ' . $vehiculoSeleccionado['modelo']
+                        . ' ' .$vehiculoSeleccionado['anio']; ?>
                     </h2>
 
                     <p>

@@ -61,5 +61,28 @@ function registrarClienteDB($conn, $nombre, $numeroDocumento, $edad, $direccion,
 }
 
 
+function recuperarDataVehiculo($conn,$carId){
+
+    // Check if customer exists
+    $sql = "SELECT marca, modelo, anio, descripcion,categoria, preciodiario,imagepath
+            FROM vehiculo WHERE id_vehiculo = ? LIMIT 1";
+    // 2. Prepare statement
+    $stmt = $conn->prepare($sql);
+
+    // 3. Bind parameters and execute
+    $stmt->bind_param("i", $carId);
+    $stmt->execute();
+
+    // 4. Get the result set
+    $result = $stmt->get_result();
+
+    // 5. Fetch the single row
+    $row = $result->fetch_assoc();
+
+    $conn->close();
+    return $row;
+}
+
+
 
 ?>

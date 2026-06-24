@@ -11,6 +11,15 @@ function listaVehiculos(){
     return $response;
 }
 
+function dataVehiculo($carId){
+
+    //getConnection instance
+    $conn = connectionDB();
+    $response = array();
+    $response = recuperarDataVehiculo($conn,$carId);
+    return $response;
+}
+
 function clientExist($numeroDocumento){
     $conn = connectionDB();
     $response = validarExisteClienteDB($conn,$numeroDocumento);
