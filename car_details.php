@@ -35,6 +35,13 @@ $vehiculoSeleccionado = dataVehiculo($id);
 $caracteristicas = explode(";",$vehiculoSeleccionado['descripcion']);
 $c = count($caracteristicas);
 
+//recuperar rangos de fechas
+$rangosfechas = consultarFechasReservaVehiculo($id);
+$rangosReservados = array();
+foreach ($rangosfechas as $row) {
+    array_push($rangosReservados, (object)['from' => $row[0], 'to' =>$row[1]]);
+}
+
 
 // Example occupied ranges per car
 $bookedDates = [
@@ -47,9 +54,10 @@ $bookedDates = [
     ],
     3 => []
 ];
-
+print_r($rangosReservados);
 // Get this car's booked dates
-$carBookedRanges = $bookedDates[$id] ?? [];
+$carBookedRanges = $rangosReservados;
+//$bookedDates[$id] ?? [];
 
  // 1. Define the directory path containing your images
  $dir = $vehiculoSeleccionado['imagepath'];

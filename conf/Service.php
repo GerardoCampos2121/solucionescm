@@ -47,4 +47,12 @@ function reservarVehiculo($idCliente,$carId,$fechaInicio,$fechaFin,
          return $response;
 }
 
+function consultarFechasReservaVehiculo($idVehiculo){
+
+    $conn = connectionDB();
+    $response = array();
+    $response = fechasReservaPorVehichuloDB($conn,$idVehiculo);
+    return $response;
+}
+
 ?>

@@ -101,7 +101,19 @@ function registrarReserva($conn, $idCliente,$idVehiculo,$fechaInicio,$fechaFin,$
     mysqli_close($conn);
 
      return $last_id;
+}
 
+function fechasReservaPorVehichuloDB($conn,$idVehiculo){
+    $sql = "SELECT fecha_inicio,fecha_fin FROM `reserva` WHERE id_vehiculo=?";
+
+    $stmt = $conn->prepare($sql);
+
+    // 3. Bind parameters and execute
+    $stmt->bind_param("i", $idVehiculo);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $rows = $result->fetch_all();
+    return $rows;
 }
 
 
