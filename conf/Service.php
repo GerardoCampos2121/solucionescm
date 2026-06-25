@@ -36,4 +36,15 @@ function registrarCliente($nombre, $numeroDocumento, $edad, $direccion,$contacto
     return $response;
 }
 
+function reservarVehiculo($idCliente,$carId,$fechaInicio,$fechaFin,
+                            $estadoPago,$numeroReserva,$montoTotal,$fechaReserva){
+
+         $conn = connectionDB();
+         $idVehiculo = (int)$carId;
+         $response = registrarReserva($conn,$idCliente,$idVehiculo,$fechaInicio,$fechaFin,
+                                      $estadoPago,$numeroReserva,$montoTotal,$fechaReserva);
+
+         return $response;
+}
+
 ?>

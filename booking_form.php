@@ -71,7 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'age' => $_POST['age'] ?? '',
         'address' => $_POST['address'] ?? '',
         'email' => $_POST['email'] ?? '',
-        'phone' => $_POST['phone'] ?? ''
+        'phone' => $_POST['phone'] ?? '',
+        'idCliente' => 0
     ];
 
     //aqui registrar cliente
@@ -79,7 +80,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($clientExist <= 0 ){
         $response = registrarCliente($customerData['name'],$customerData['document_id'],$customerData['age'],$customerData['address'],
         $customerData['phone'],$customerData['email']);
+        echo "idClienteRegistrado: ".$response;
+        $customerData['idCliente'] = $response;
+    }else{
+        $customerData['idCliente'] = $clientExist['id_cliente'];
     }
+     echo "pasamoosss yaay";
     
     // Store booking data in session for transfer to summary page
     $_SESSION['booking_data'] = $customerData;

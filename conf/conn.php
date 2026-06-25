@@ -34,13 +34,15 @@ return $data;
 }
 
 function validarExisteClienteDB($conn,$numeroDocumento){
-   $sql = "SELECT 1 FROM cliente WHERE numero_documento = ? LIMIT 1";
+   $sql = "SELECT id_cliente FROM cliente WHERE numero_documento = ? LIMIT 1";
    $stmt = mysqli_prepare($conn, $sql);
    mysqli_stmt_bind_param($stmt, "s",$numeroDocumento);
    mysqli_stmt_execute($stmt);
    $result = mysqli_stmt_get_result($stmt);
-   $rowCount = mysqli_num_rows($result);
-   return $rowCount;
+   //$rowCount = mysqli_num_rows($result);
+   //$rowResult = msqli_stmt_fetch_assoc($result);
+   $row = mysqli_fetch_assoc($result);
+   return $row;
 }
 
 
@@ -86,12 +88,12 @@ function recuperarDataVehiculo($conn,$carId){
 
 function registrarReserva($conn, $idCliente,$idVehiculo,$fechaInicio,$fechaFin,$estadoPago,$numeroReserva,
                                 $montoTotal,$fechaReserva){
-     $sql = "INSERT INTO `cliente`(`id_cliente`, `id_vehiculo`, `fecha_inicio`, `fecha_fin`, `estado_pago`,
+     $sql = "INSERT INTO `reserva`(`id_cliente`, `id_vehiculo`, `fecha_inicio`, `fecha_fin`, `estado_pago`,
                                     `numero_reserva`, `monto_total`,`fecha_reserva`)
      VALUES (?,?,?,?,?,?,?,?)";
 
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ss",$idCliente,$idVehiculo,$fechaInicio,$fechaFin,$estadoPago, $numeroReserva,$montoTotal,$fechaReserva);
+    mysqli_stmt_bind_param($stmt, "ssssssss",$idCliente,$idVehiculo,$fechaInicio,$fechaFin,$estadoPago,$numeroReserva,$montoTotal,$fechaReserva);
     mysqli_stmt_execute($stmt);
     $last_id = mysqli_stmt_insert_id($stmt);
     //echo "Inserted ID: " . $last_id;

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("conf/Service.php");
+include("../conf/Service.php");
 
 
 // Get booking data from session (transferred via POST from booking_form.php)
@@ -15,6 +15,8 @@ if (!$bookingData) {
 $carId = $bookingData['car_id'] ?? null;
 $startDate = $bookingData['start_date'] ?? null;
 $endDate = $bookingData['end_date'] ?? null;
+
+$idCliente = $bookingData['idCliente'];
 
 // Customer data from session
 $customerName = $bookingData['name'] ?? 'N/A';
@@ -79,6 +81,14 @@ $total = $subtotal + $tax;
 // Generate booking ID
 $bookingId = 'BK-' . strtoupper(substr(uniqid(), -6));
 $bookingDate = date('Y-m-d H:i:s');
+
+$startDateFormated = date('Y-m-d H:i:s', strtotime($startDate));
+$endDateFormated = date('Y-m-d H:i:s', strtotime($endDate));
+
+//registrar reserva
+$result = reservarVehiculo($idCliente,$carId,$startDateFormated,$endDateFormated,'PENDIENTE',$bookingId,$total,$bookingDate);
+echo $result;
+
 ?>
 
 <!DOCTYPE html>

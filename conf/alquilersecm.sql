@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2026 at 01:21 AM
+-- Generation Time: Jun 25, 2026 at 06:41 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,8 +43,7 @@ CREATE TABLE `cliente` (
 
 INSERT INTO `cliente` (`id_cliente`, `nombre`, `numero_documento`, `edad`, `direccion`, `contacto`, `correo`) VALUES
 (1, 'Gerardo Enrique Campos Martinez', '045058551', 34, 'Residencial la gloria, Pasaje F-2, casa #39, mejicanos', '+50371494009', '0'),
-(2, 'Gerardo Enrique Campos Martinez', '045058552', 34, 'Residencial la gloria, Pasaje F-2, casa #39, mejicanos', '+50371494009', 'reynadocampos19@gmail.com'),
-(4, '', '', 0, '', '', '');
+(2, 'Gerardo Enrique Campos Martinez', '045058552', 34, 'Residencial la gloria, Pasaje F-2, casa #39, mejicanos', '+50371494009', 'reynadocampos19@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -63,6 +62,13 @@ CREATE TABLE `reserva` (
   `monto_total` double DEFAULT NULL,
   `fecha_reserva` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reserva`
+--
+
+INSERT INTO `reserva` (`id_reserva`, `id_cliente`, `id_vehiculo`, `fecha_inicio`, `fecha_fin`, `estado_pago`, `numero_reserva`, `monto_total`, `fecha_reserva`) VALUES
+(1, 2, 1, '2026-06-25 00:00:00', '2026-06-29 00:00:00', 'PENDIENTE', 'BK-9123F7', 203.4, '2026-06-25 18:40:41');
 
 -- --------------------------------------------------------
 
@@ -131,7 +137,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT for table `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `vehiculo`
