@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2026 at 06:41 PM
+-- Generation Time: Jun 26, 2026 at 01:20 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id_cliente`, `nombre`, `numero_documento`, `edad`, `direccion`, `contacto`, `correo`) VALUES
-(1, 'Gerardo Enrique Campos Martinez', '045058551', 34, 'Residencial la gloria, Pasaje F-2, casa #39, mejicanos', '+50371494009', '0'),
+(1, 'Gerardo Enrique Campos Martinez', '045058551', 34, 'Residencial la gloria, Pasaje F-2, casa #39, mejicanos', '+50371494009', 'correox@gmail.com'),
 (2, 'Gerardo Enrique Campos Martinez', '045058552', 34, 'Residencial la gloria, Pasaje F-2, casa #39, mejicanos', '+50371494009', 'reynadocampos19@gmail.com');
 
 -- --------------------------------------------------------
@@ -68,7 +68,11 @@ CREATE TABLE `reserva` (
 --
 
 INSERT INTO `reserva` (`id_reserva`, `id_cliente`, `id_vehiculo`, `fecha_inicio`, `fecha_fin`, `estado_pago`, `numero_reserva`, `monto_total`, `fecha_reserva`) VALUES
-(1, 2, 1, '2026-06-25 00:00:00', '2026-06-29 00:00:00', 'PENDIENTE', 'BK-9123F7', 203.4, '2026-06-25 18:40:41');
+(1, 2, 1, '2026-06-25 00:00:00', '2026-06-29 00:00:00', 'PENDIENTE', 'BK-9123F7', 203.4, '2026-06-25 18:40:41'),
+(2, 1, 2, '2026-06-26 00:00:00', '2026-06-29 00:00:00', 'PENDIENTE', 'BK-D9605D', 169.5, '2026-06-25 21:08:29'),
+(3, 1, 1, '2026-07-05 00:00:00', '2026-07-18 00:00:00', 'PENDIENTE', 'BK-A718B6', 661.05, '2026-06-25 21:09:14'),
+(4, 2, 2, '2026-07-01 00:00:00', '2026-07-04 00:00:00', 'PENDIENTE', 'BK-386B3F', 169.5, '2026-06-25 22:14:11'),
+(5, 2, 2, '2026-07-20 00:00:00', '2026-07-22 00:00:00', 'PENDIENTE', 'BK-3C8572', 113, '2026-06-25 22:18:11');
 
 -- --------------------------------------------------------
 
@@ -84,19 +88,20 @@ CREATE TABLE `vehiculo` (
   `descripcion` varchar(300) DEFAULT NULL,
   `categoria` varchar(15) NOT NULL,
   `preciodiario` decimal(10,2) NOT NULL,
-  `imagepath` varchar(200) DEFAULT NULL
+  `imagepath` varchar(200) DEFAULT NULL,
+  `estado` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vehiculo`
 --
 
-INSERT INTO `vehiculo` (`id_vehiculo`, `marca`, `modelo`, `anio`, `descripcion`, `categoria`, `preciodiario`, `imagepath`) VALUES
-(1, 'Kia', 'Forte', '2018', 'Automático;Motor 1.8;Vidrios eléctricos;Pantalla digital;Aire acondicionado', 'Sedan', 25.00, 'images/kiaforte2018/'),
-(2, 'Kia', 'Forte', '2019', 'Automático;Motor 1.8;Vidrios eléctricos;Pantalla digital;Aire acondicionado', 'Sedan', 30.00, 'images/kiaforte2019/'),
-(3, 'Kia', 'Forte', '2020', 'Automático;Motor 1.8;Vidrios eléctricos;Pantalla digital;Aire acondicionado', 'Sedan', 26.00, 'images/kiaforte2019/'),
-(4, 'Kia', 'Forte', '2021', 'Automático;Motor 1.8;Vidrios eléctricos;Pantalla digital;Aire acondicionado', 'Sedan', 27.00, 'images/kiaforte2018/'),
-(5, 'Kia', 'Forte', '2022', 'Automático;Motor 1.8;Vidrios eléctricos;Pantalla digital;Aire acondicionado', 'Sedan', 28.00, 'images/kiaforte2019/');
+INSERT INTO `vehiculo` (`id_vehiculo`, `marca`, `modelo`, `anio`, `descripcion`, `categoria`, `preciodiario`, `imagepath`, `estado`) VALUES
+(1, 'Kia', 'Forte', '2018', 'Automático;Motor 1.8;Vidrios eléctricos;Pantalla digital;Aire acondicionado', 'Sedan', 25.00, 'images/kiaforte2018/', 'ACTIVO'),
+(2, 'Kia', 'Forte', '2019', 'Automático;Motor 1.8;Vidrios eléctricos;Pantalla digital;Aire acondicionado', 'Sedan', 30.00, 'images/kiaforte2019/', 'ACTIVO'),
+(3, 'Nissan', 'Sentra SR', '2019', 'Automático;Motor 1.8;Vidrios eléctricos;Pantalla digital;Aire acondicionado', 'Sedan', 26.00, 'images/nissansentra2019/', 'ACTIVO'),
+(4, 'Kia', 'Forte', '2021', 'Automático;Motor 1.8;Vidrios eléctricos;Pantalla digital;Aire acondicionado', 'Sedan', 27.00, 'images/kiaforte2018/', 'ACTIVO'),
+(5, 'Kia', 'Forte', '2022', 'Automático;Motor 1.8;Vidrios eléctricos;Pantalla digital;Aire acondicionado', 'Sedan', 28.00, 'images/kiaforte2019/', 'ACTIVO');
 
 --
 -- Indexes for dumped tables
@@ -137,7 +142,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT for table `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `vehiculo`
