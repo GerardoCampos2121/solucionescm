@@ -51,6 +51,12 @@ $bookedDates = [
 // Get this car's booked dates
 $carBookedRanges = $bookedDates[$id] ?? [];
 
+ // 1. Define the directory path containing your images
+ $dir = $vehiculoSeleccionado['imagepath'];
+
+ // 2. Fetch all image files matching common extensions
+$images = glob($dir . "*.{jpg,jpeg,png,gif,webp}", GLOB_BRACE);
+
 ?>
 
 <!DOCTYPE html>
@@ -66,17 +72,7 @@ $carBookedRanges = $bookedDates[$id] ?? [];
 
     <style>
 
-            /* Slider Container */
-            .slider-container { position: relative; width: 600px; height: 400px; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-            .slides { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
-            .slide { min-width: 100%; height: 100%; }
-            .slide img { width: 100%; height: 100%; object-fit: cover; }
-
-            /* Navigation Buttons */
-            .btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 15px; cursor: pointer; font-size: 18px; border-radius: 50%; user-select: none; }
-            .btn:hover { background: rgba(0,0,0,0.8); }
-            .prev { left: 10px; }
-            .next { right: 10px; }
+            
 
             .btn-propio {
                     display: inline-block;
@@ -121,38 +117,39 @@ $carBookedRanges = $bookedDates[$id] ?? [];
 <div class="container mt-5">
 
     <a href="index.php" class="btn btn-secondary mb-4">← Regresar a Inicio</a>
-
-    <div class="card shadow">
-        <div class="row g-0">
+    
+        <div class="card shadow">
+        <div class="row ">
 
             <!-- Image -->
-            <div class="col-md-6">
-                <div class="slider-container">
-                    <div class="slides">
-
+            <div class="col-xl-6 col-md-2">
+            
+            <div id="carouselExampleSlidesOnly1" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <!--div class="carousel-item active">
+                        <img src="images/kiaforte2018/corolla1.jpg" class="d-block w-100" alt="First slide">
+                        </div-->
                         <?php
-                        // 1. Define the directory path containing your images
-                        $dir = $vehiculoSeleccionado['imagepath'];
-
-                        // 2. Fetch all image files matching common extensions
-                        $images = glob($dir . "*.{jpg,jpeg,png,gif,webp}", GLOB_BRACE);
-
-                        // 3. Loop through the array and render each image inside a slide div
+                        $i=0;
+                        $active="";
                         if (!empty($images)) {
-                            foreach ($images as $image) {
-                                echo '<div class="slide"><img src="' . htmlspecialchars($image) . '" alt="Slider Image"></div>';
-                            }
-                        } else {
-                            echo '<div class="slide" style="display:flex; justify-content:center; align-items:center; background:#ccc;">No images found.</div>';
-                        }
+                                        foreach ($images as $image) {
+                                            if ($i==0)
+                                                $active="active";
+                                            echo '<div class="carousel-item '.$active.'"><img src="' . htmlspecialchars($image) . '" class="d-block w-100" alt="Slider Image"></div>';
+                                            $i++;
+                                            $active="";
+                                        }
+                                    }
                         ?>
-
                     </div>
-                </div>
             </div>
+                    
+
+            </div>    
 
             <!-- Details -->
-            <div class="col-md-6">
+            <div class="col-xl-6 col-md-3">
                 <div class="card-body">
                     <h2 class="card-title fw-bold">
                         <?php echo $vehiculoSeleccionado['marca'] . ' ' . $vehiculoSeleccionado['modelo']
@@ -185,7 +182,7 @@ $carBookedRanges = $bookedDates[$id] ?? [];
                         <!-- Hidden field for car ID -->
                         <input type="hidden" name="car_id" value="<?php echo $id; ?>">
                         <div>
-                            <button type="submit" class="btn-propio" id="confirmBookingBtn">
+                            <button type="submit" class="btn btn-primary" id="confirmBookingBtn">
                                 Continuar Reserva
                         </button>
                              
@@ -202,6 +199,11 @@ $carBookedRanges = $bookedDates[$id] ?? [];
     </div>
 
 </div>
+
+
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
@@ -247,11 +249,13 @@ $carBookedRanges = $bookedDates[$id] ?? [];
         this.appendChild(endDateInput);
     });
 
+    /*
+
     let currentIndex = 0;
     const slidesContainer = document.querySelector('.slides');
     const totalSlides = document.querySelectorAll('.slide').length;
 
-    function updateSlider() {
+    /*function updateSlider() {
         // Shift the slide viewport container left/right based on current index
         slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
@@ -267,7 +271,7 @@ $carBookedRanges = $bookedDates[$id] ?? [];
     // Optional: Auto-play the slider every 4 seconds
     setInterval(() => {
         moveSlide(1);
-    }, 3000);
+    }, 3000);*/
 </script>
 
 </body>
