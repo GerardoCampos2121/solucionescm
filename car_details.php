@@ -124,7 +124,7 @@ $images = glob($dir . "*.{jpg,jpeg,png,gif,webp}", GLOB_BRACE);
             <!-- Image -->
             <div class="col-xl-6 col-md-2">
             
-            <div id="carouselExampleSlidesOnly1" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleSlidesOnly1" class="carousel slide" data-bs-ride="carousel"  data-bs-interval="2000">
                     <div class="carousel-inner">
                         <!--div class="carousel-item active">
                         <img src="images/kiaforte2018/corolla1.jpg" class="d-block w-100" alt="First slide">
