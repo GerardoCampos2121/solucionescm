@@ -3,6 +3,7 @@ session_start();
 
 include("conf/Service.php");
 
+$carId = 0;
 if (!isset($_POST['guardar_frm'])) //si no viene el boton en el post entonces vienen de la pagina anterior
 {    
     // Get car ID and dates from URL parameters
@@ -19,45 +20,15 @@ if (!isset($_POST['guardar_frm'])) //si no viene el boton en el post entonces vi
     $bookingConfirmed = false;
 
 }
-// Car data (same as in car_details.php - later this will come from database)
-$cars = [
-    [
-        'id' => 1,
-        'make' => 'Toyota',
-        'model' => 'Corolla',
-        'status' => 'Available',
-        'image' => 'https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=60'
-    ],
-    [
-        'id' => 2,
-        'make' => 'Honda',
-        'model' => 'Civic',
-        'status' => 'Rented',
-        'image' => 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=60'
-    ],
-    [
-        'id' => 3,
-        'make' => 'Ford',
-        'model' => 'Mustang',
-        'status' => 'Available',
-        'image' => 'images/forte2014.jpeg'
-    ],
-];
 
-// Find selected car
-$selectedCar = null;
-
-foreach ($cars as $car) {
-    if ($car['id'] == $carId) {
-        $selectedCar = $car;
-        break;
-    }
-}
 
 // If car not found or no dates selected
-if (!$selectedCar || !$startDate || !$endDate) {
+if (!$carId || !$carId || !$carId) {
     die("Invalid booking information. Please go back and select a car and dates.");
 }
+
+$selectedCar = dataVehiculo($carId);
+$imageCar = $selectedCar['imagepath']."/1.jpg";
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -85,7 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }else{
         $customerData['idCliente'] = $clientExist['id_cliente'];
     }
-     echo "pasamoosss yaay";
     
     // Store booking data in session for transfer to summary page
     $_SESSION['booking_data'] = $customerData;
@@ -437,11 +407,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                                 <div class="card-body p-4">
                                     <div class="text-center mb-3">
-                                        <img src="<?php echo $selectedCar['image']; ?>" 
-                                             alt="<?php echo $selectedCar['make'] . ' ' . $selectedCar['model']; ?>" 
+                                        <img src="<?php echo $imageCar; ?>"
+                                             alt="<?php echo $selectedCar['marca'] . ' ' . $selectedCar['modelo']; ?>"
                                              style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px;">
                                     </div>
-                                    <h5 class="text-center mb-3"><?php echo $selectedCar['make'] . ' ' . $selectedCar['model']; ?></h5>
+                                    <h5 class="text-center mb-3"><?php echo $selectedCar['marca'] . ' ' . $selectedCar['modelo']; ?></h5>
                                     
                                     <div class="info-row">
                                         <span class="info-label">Start Date</span>

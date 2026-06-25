@@ -56,14 +56,15 @@ $cars = [
 ];
 
 // Find selected car
-$selectedCar = null;
+$selectedCar = $car['id'];
+/*
 foreach ($cars as $car) {
     if ($car['id'] == $carId) {
         $selectedCar = $car;
         break;
     }
 }
-
+*/
 // If car not found or no dates selected
 if (!$selectedCar || !$startDate || !$endDate) {
     die("Invalid booking information. Please go back and select a car and dates.");
