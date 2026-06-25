@@ -1,32 +1,6 @@
 <?php
 
-// Same car data (later this will come from database)
-$cars = [
-    [
-        'id' => 1,
-        'make' => 'Toyota',
-        'model' => 'Corolla',
-        'status' => 'Available',
-        'image' => 'https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=60'
-    ],
-    [
-        'id' => 2,
-        'make' => 'Honda',
-        'model' => 'Civic',
-        'status' => 'Rented',
-        'image' => 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=60'
-    ],
-    [
-        'id' => 3,
-        'make' => 'Ford',
-        'model' => 'Mustang',
-        'status' => 'Available',
-        'image' => 'images/forte2014.jpeg'
-    ],
-];
-
 include("conf/Service.php");
-
 
 // Get car ID
 $id = $_GET['id'] ?? null;
@@ -41,23 +15,6 @@ $rangosReservados = array();
 foreach ($rangosfechas as $row) {
     array_push($rangosReservados, (object)['from' => $row[0], 'to' =>$row[1]]);
 }
-
-
-// Example occupied ranges per car
-$bookedDates = [
-    1 => [
-        ['from' => '2026-06-04', 'to' => '2026-06-05'],
-        ['from' => '2026-06-06', 'to' => '2026-06-07']
-    ],
-    2 => [
-        ['from' => '2026-05-02', 'to' => '2026-05-08']
-    ],
-    3 => []
-];
-print_r($rangosReservados);
-// Get this car's booked dates
-$carBookedRanges = $rangosReservados;
-//$bookedDates[$id] ?? [];
 
  // 1. Define the directory path containing your images
  $dir = $vehiculoSeleccionado['imagepath'];
@@ -215,7 +172,7 @@ $images = glob($dir . "*.{jpg,jpeg,png,gif,webp}", GLOB_BRACE);
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
-    const bookedRanges = <?php echo json_encode($carBookedRanges); ?>;
+    const bookedRanges = <?php echo json_encode($rangosReservados); ?>;
 
     flatpickr("#rentalRange", {
         mode: "range",
