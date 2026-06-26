@@ -255,10 +255,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="page-header">
         <div class="container">
             <a href="car_details.php?id=<?php echo $carId; ?>" class="back-btn mb-3 d-inline-block">
-                <i class="fas fa-arrow-left me-2"></i>Back to Car Details
+                <i class="fas fa-arrow-left me-2"></i>Regresar a fechas de reserva
             </a>
-            <h1><i class="fas fa-calendar-check me-2"></i>Complete Your Booking</h1>
-            <p class="mb-0">Provide your information to finalize your car rental reservation</p>
+            <h1><i class="fas fa-calendar-check me-2"></i>Completa tu reserva!</h1>
+            <p class="mb-0">Completa tu información para confirmar tu reserva!</p>
         </div>
     </div>
             
@@ -268,21 +268,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <!-- Customer Registration Check Div -->
                 <div id="customer-check-section" class="customer-check-card mb-4">
                     <div class="card-header-custom">
-                        <h4><i class="fas fa-user-check me-2"></i>Customer Verification</h4>
+                        <h4><i class="fas fa-user-check me-2"></i>Verificación de registro</h4>
                     </div>
                     <div class="card-body p-4">
-                        <p class="text-muted mb-3">Already have an account? Enter your Document ID to verify and auto-fill your information.</p>
+                        <p class="text-muted mb-3">Ya eres cliente registrado? Ingresa tu número de documento para verificar y auto completar tu información.</p>
                         <div class="row g-3 align-items-end">
                             <div class="col-md-8">
                                 <label for="check_document_id" class="form-label">
-                                    <i class="fas fa-id-card me-1"></i>Document ID
+                                    <i class="fas fa-id-card me-1"></i>Número de documento
                                 </label>
                                 <input type="text" class="form-control" id="check_document_id" 
                                        placeholder="Enter your DUI, Passport, or ID number">
                             </div>
                             <div class="col-md-4">
                                 <button type="button" class="btn-check-customer w-100" id="btnCheckCustomer">
-                                    <i class="fas fa-search me-1"></i>Check
+                                    <i class="fas fa-search me-1"></i>Consultar
                                 </button>
                             </div>
                         </div>
@@ -310,34 +310,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="col-lg-4">
                             <div class="booking-card h-100">
                                 <div class="card-header-custom">
-                                    <h4><i class="fas fa-id-card me-2"></i>Primary Details</h4>
+                                    <h4><i class="fas fa-id-card me-2"></i>Datos personales</h4>
                                 </div>
                                 <div class="card-body p-4">
                                     <div class="checkout-form">
                                         <label for="name" class="form-label">
-                                            <i class="fas fa-user me-1 text-primary"></i>Full Name <span class="required">*</span>
+                                            <i class="fas fa-user me-1 text-primary"></i>Nombre completo <span class="required">*</span>
                                         </label>
                                         <input type="text" class="form-control" id="name" name="name" required 
                                                 placeholder="Your full legal name">                                        
-                                        <div class="form-text">As it appears on your ID</div>
+                                        <div class="form-text">Como aparece en tu documento de identificación</div>
                                     </div>
 
                                     <div class="mb-4">
                                         <label for="document_id" class="form-label">
-                                            <i class="fas fa-passport me-1 text-primary"></i>Document ID <span class="text-danger">*</span>
+                                            <i class="fas fa-passport me-1 text-primary"></i>Número de documento <span class="text-danger">*</span>
                                         </label>                                        
                                         <input type="text" class="form-control" id="document_id" name="document_id" required 
                                             placeholder="DUI, Passport, etc.">                                        
-                                        <div class="form-text">Valid government-issued ID</div>
+                                        <div class="form-text">Documento único legal de identificación</div>
                                     </div>
 
                                     <div class="mb-4">
                                         <label for="age" class="form-label">
-                                            <i class="fas fa-birthday-cake me-1 text-primary"></i>Age <span class="text-danger">*</span>
+                                            <i class="fas fa-birthday-cake me-1 text-primary"></i>Edad <span class="text-danger">*</span>
                                         </label>                                        
                                         <input type="number" class="form-control" id="age" name="age" required 
                                                 min="18" max="100" placeholder="18+">                                        
-                                        <div class="form-text">Minimum 18 years required</div>
+                                        <div class="form-text">Mínimo 18 años requerido</div>
                                     </div>
                                 </div>
                             </div>
@@ -347,25 +347,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="col-lg-4">
                             <div class="booking-card h-100">
                                 <div class="card-header-custom">
-                                    <h4><i class="fas fa-address-book me-2"></i>Contact Information</h4>
+                                    <h4><i class="fas fa-address-book me-2"></i>Información de contacto</h4>
                                 </div>
                                 <div class="card-body p-4">
                                     <div class="mb-4">
                                         <label for="address" class="form-label">
-                                            <i class="fas fa-home me-1 text-primary"></i>Full Address <span class="text-danger">*</span>
+                                            <i class="fas fa-home me-1 text-primary"></i>Dirección de entrega vehiculo <span class="text-danger">*</span>
                                         </label>
                                         <div class="input-group">
                                             <span class="input-group-text">
                                                 <i class="fas fa-home"></i>
                                             </span>
                                             <textarea class="form-control" id="address" name="address" rows="3" required 
-                                                    placeholder="Your complete residential address"></textarea>
+                                                    placeholder="Dirección donde deseas recibir el vehiculo"></textarea>
                                         </div>
                                     </div>
 
                                     <div class="mb-4">
                                         <label for="email" class="form-label">
-                                            <i class="fas fa-envelope me-1 text-primary"></i>Email Address <span class="text-danger">*</span>
+                                            <i class="fas fa-envelope me-1 text-primary"></i>Correo <span class="text-danger">*</span>
                                         </label>
                                         <div class="input-group">
                                             <span class="input-group-text">
@@ -374,26 +374,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <input type="email" class="form-control" id="email" name="email" required 
                                                 placeholder="your@email.com">
                                         </div>
-                                        <div class="form-text">Confirmation sent here</div>
+                                        <div class="form-text">Ingresa formato válido</div>
                                     </div>
 
                                     <div class="mb-4">
                                         <label for="phone" class="form-label">
-                                            <i class="fas fa-phone me-1 text-primary"></i>Phone Number <span class="text-danger">*</span>
+                                            <i class="fas fa-phone me-1 text-primary"></i>Número de teléfono <span class="text-danger">*</span>
                                         </label>
                                         <div class="input-group">
                                             <span class="input-group-text">
                                                 <i class="fas fa-phone"></i>
                                             </span>
                                             <input type="tel" class="form-control" id="phone" name="phone" required 
-                                                placeholder="+503 XXXX-XXXX">
+                                                placeholder="XXX XXXX-XXXX">
                                         </div>
-                                        <div class="form-text">For booking updates</div>
+                                        <div class="form-text">Para actualizaciones de reserva</div>
                                     </div>
 
                                     <div class="info-box mt-4">
                                         <i class="fas fa-info-circle me-2"></i>
-                                        <strong>Important:</strong> All information must be accurate for verification purposes.
+                                        <strong>Important:</strong> Toda la información debe ser precisa para fines de verificación.
                                     </div>
                                 </div>
                             </div>
@@ -403,7 +403,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="col-lg-4">
                             <div class="booking-card h-100">
                                 <div class="card-header-custom">
-                                    <h4><i class="fas fa-receipt me-2"></i>Booking Summary</h4>
+                                    <h4><i class="fas fa-receipt me-2"></i>Resumen de reserva</h4>
                                 </div>
                                 <div class="card-body p-4">
                                     <div class="text-center mb-3">
@@ -411,30 +411,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                              alt="<?php echo $selectedCar['marca'] . ' ' . $selectedCar['modelo']; ?>"
                                              style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px;">
                                     </div>
-                                    <h5 class="text-center mb-3"><?php echo $selectedCar['marca'] . ' ' . $selectedCar['modelo']; ?></h5>
+                                    <h5 class="text-center mb-3"><?php echo $selectedCar['marca'] . ' ' . $selectedCar['modelo']. ' ' . $selectedCar['anio']; ?></h5>
                                     
                                     <div class="info-row">
-                                        <span class="info-label">Start Date</span>
+                                        <span class="info-label">Desde: </span>
                                         <span class="info-value"><?php echo date('M d, Y', strtotime($startDate)); ?></span>
                                     </div>
                                     <div class="info-row">
-                                        <span class="info-label">End Date</span>
+                                        <span class="info-label">Hasta:</span>
                                         <span class="info-value"><?php echo date('M d, Y', strtotime($endDate)); ?></span>
                                     </div>
                                     <div class="info-row">
-                                        <span class="info-label">Duration</span>
+                                        <span class="info-label">Duración</span>
                                         <span class="info-value">
                                             <?php
                                             $days = (strtotime($endDate) - strtotime($startDate)) / 86400;
-                                            echo $days . ' day(s)';
+                                            echo $days . ' días(s)';
                                             ?>
                                         </span>
                                     </div>
                                     
                                     <div class="info-box mt-4">
                                         <i class="fas fa-shield-alt me-2"></i>
-                                        <strong>Secure Booking</strong><br>
-                                        <small>Your information is protected.</small>
+                                        <strong>Información de reserva</strong><br>
+                                        <small>Tu información será procesada y protegida.</small>
                                     </div>
                                 </div>
                             </div>
@@ -442,10 +442,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <div class="d-grid gap-3 mt-4">
-                    <input type="submit" class="btn-confirm" name="guardar_frm" value="Confirm Booking" id="guardar_frm"> 
+                    <input type="submit" class="btn-confirm" name="guardar_frm" value="Confirmar Reserva" id="guardar_frm">
                 
                         <a href="car_details.php?id=<?php echo $carId; ?>" class="btn btn-cancel">
-                            <i class="fas fa-times me-2"></i>Cancel
+                            <i class="fas fa-times me-2"></i>Cancelar
                         </a>
                     </div>
                     </form>

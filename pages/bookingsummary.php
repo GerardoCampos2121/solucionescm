@@ -27,54 +27,22 @@ $email = $bookingData['email'] ?? 'N/A';
 $phone = $bookingData['phone'] ?? 'N/A';
 
 
-// Car data (same as in other files - later this will come from database)
-$cars = [
-    [
-        'id' => 1,
-        'make' => 'Toyota',
-        'model' => 'Corolla',
-        'status' => 'Available',
-        'price_per_day' => 45.00,
-        'image' => 'https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=60'
-    ],
-    [
-        'id' => 2,
-        'make' => 'Honda',
-        'model' => 'Civic',
-        'status' => 'Rented',
-        'price_per_day' => 50.00,
-        'image' => 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=60'
-    ],
-    [
-        'id' => 3,
-        'make' => 'Ford',
-        'model' => 'Mustang',
-        'status' => 'Available',
-        'price_per_day' => 75.00,
-        'image' => 'images/forte2014.jpeg'
-    ],
-];
-
 // Find selected car
-$selectedCar = $car['id'];
-/*
-foreach ($cars as $car) {
-    if ($car['id'] == $carId) {
-        $selectedCar = $car;
-        break;
-    }
-}
-*/
+$selectedCar = $carId;
+
+
 // If car not found or no dates selected
 if (!$selectedCar || !$startDate || !$endDate) {
     die("Invalid booking information. Please go back and select a car and dates.");
 }
 
+$carInformation = dataVehiculo($carId);
+
 // Calculate rental details
 $startTime = strtotime($startDate);
 $endTime = strtotime($endDate);
 $days = ($endTime - $startTime) / 86400;
-$pricePerDay = $selectedCar['price_per_day'];
+$pricePerDay = $carInformation['preciodiario'];
 $subtotal = $days * $pricePerDay;
 $tax = $subtotal * 0.13; // 13% tax
 $total = $subtotal + $tax;
@@ -88,7 +56,8 @@ $endDateFormated = date('Y-m-d H:i:s', strtotime($endDate));
 
 //registrar reserva
 $result = reservarVehiculo($idCliente,$carId,$startDateFormated,$endDateFormated,'PENDIENTE',$bookingId,$total,$bookingDate);
-echo $result;
+
+$imageCar = $carInformation['imagepath']."/1.jpg";
 
 ?>
 
@@ -352,19 +321,19 @@ echo $result;
                 </div>
                 <div class="row">
                     <div class="col-md-5">
-                        <img src="<?php echo $selectedCar['image']; ?>" 
-                             alt="<?php echo $selectedCar['make'] . ' ' . $selectedCar['model']; ?>" 
+                        <img src="<?php echo $imageCar; ?>"
+                             alt="<?php echo $carInformation['marca'] . ' ' . $carInformation['modelo']; ?>"
                              class="car-summary-img">
                     </div>
                     <div class="col-md-7">
-                        <h4 class="mb-3"><?php echo $selectedCar['make'] . ' ' . $selectedCar['model']; ?></h4>
+                        <h4 class="mb-3"><?php echo $carInformation['marca'] . ' ' . $carInformation['modelo']; ?></h4>
                         <span class="status-badge status-confirmed">
                             <i class="fas fa-check-circle me-1"></i>Confirmed
                         </span>
                         <div class="mt-3">
                             <div class="info-row">
                                 <span class="info-label">Vehicle ID</span>
-                                <span class="info-value">#<?php echo $selectedCar['id']; ?></span>
+                                <span class="info-value">#<?php echo $carId; ?></span>
                             </div>
                             <div class="info-row">
                                 <span class="info-label">Category</span>

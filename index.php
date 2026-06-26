@@ -65,8 +65,8 @@ $num_vehiculos = count($response);
     <!-- Welcome Section -->
     <div class="row">
         <div class="text-center mb-5">
-            <h1 class="display-5 fw-bold" style="color: #111827;">Welcome to SECM Rent a Car</h1>
-            <p class="text-muted lead">Choose from our selection of quality vehicles</p>
+            <h1 class="display-5 fw-bold" style="color: #111827;">Bienvenido a SECM Rent a Car</h1>
+            <p class="text-muted lead">Elije comodidad, experiencia de nuetras calidad de vehiculos!</p>
         </div>
     </div>
     <div class="row">
